@@ -1,24 +1,20 @@
 defmodule MyList do
+
   def sum([]), do: 0
   def sum([head | tail]), do: head + sum(tail)
 
-  # ListAndRecursion-1
-  def mapsum([], _func), do: 0
+  def mapsum([], _), do: 0
   def mapsum([head | tail], func), do: func.(head) + mapsum(tail, func)
 
-  # ListAndRecursion-2
   def max(list), do: _max(list, 0)
-  defp _max([], max_item), do: max_item
-  defp _max([head | tail], max_item) when head <= max_item, do: _max(tail, max_item)
-  defp _max([head | tail], max_item), do: _max(tail, head)
+  defp _max([], max_value), do: max_value
+  defp _max([head | tail], max_value) when head < max_value, do: _max(tail, max_value)
+  defp _max([head | tail], max_value) when head > max_value, do: _max(tail, head)
 
-  # ListsAndRecursion-3
-  def caesar([], _key), do: []
-  def caesar([head | tail], key) when head + key <= ?z do
-    [head + key | caesar(tail, key)]
-  end
-  def caesar([head | tail], key) do
-    [head + key - 26 | caesar(tail, key)]
-  end
+  def caesar([], _), do: []
+  def caesar([head | tail], n) when head + n > ?z, do: [head + n - 26 | caesar(tail, n)]
+  def caesar([head | tail], n), do: [head + n | caesar(tail, n)]
 
+  def span(from, to) when from > to, do: []
+  def span(from, to), do: [from | span(from + 1, to)]
 end
