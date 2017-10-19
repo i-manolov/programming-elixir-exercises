@@ -23,4 +23,16 @@ defmodule MyEnum do
       filter(tail, func)
     end
   end
+
+  def split(list, 0), do: {[], list}
+  def split(list, count) when length(list) < count, do: {list, []}
+  def split([head | tail], count) do
+    {left, right} = split(tail, count - 1)
+    {[head | left], right}
+  end
+
+  def take(list, count) do
+    {left, _right} = split(list, count)
+  def take(_list, _count), do: []
+
 end
